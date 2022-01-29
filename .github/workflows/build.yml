@@ -1,0 +1,70 @@
+# The events on GitHub that will cause the workflow to be executed.
+# This can be changed to `pull_request` to only run when a pull request has 
+# been opened.
+on: [push]
+
+env:
+    # The name of the directory of the generated Wasm package.
+    WASM_PACKAGE_NAME: wasm-build
+
+# The name of the workflow to be displayed on the repository's actions page.
+name: CI
+
+# A list of the jobs that will run during the workflow. Each job runs 
+# independently of the others and on different virtual environments.
+# We have a single job, which:
+# 1. Installs the cargo binaries
+# 2. Runs `wasm-pack` to build the Wasm package.
+# 3. Runs `npm install` to install the dependencies in the React client.
+# 4. Runs `npm build` to build the React client.
+jobs:
+    build:
+        # A name for our job which will be displayed on GitHub.
+        name: React Wasm
+        # The type of runner to use to run the job on. `ubuntu-latest` is 
+        # usually the right choice.
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            # GitHub action for the `rustup` command. We use this to define 
+            # that we'll use the `stable` toolchain.
+            # https://github.com/actions-rs/toolchain
+            - name: Install latest stable
+              uses: actions-rs/toolchain@v1
+              with:
+                toolchain: stable
+            # First, build the Rust project.
+            # GitHub action for the `cargo` command package.
+            # https://github.com/actions-rs/cargo
+            - name: Build the Rust project
+              uses: actions-rs/cargo@v1
+              with:
+                command: check
+                args: --manifest-path ./wasm/Cargo.toml
+            # # Next, install the `wasm-pack` binary.
+            # - name: Install wasm-pack
+            #     - working-directory: ./wasm
+            #     - uses: actions-rs/cargo@v1
+            #         with:
+            #             command: install
+            #             args: wasm-pack
+            # # Run the `wasm-pack` binary to generate the Wasm package.
+            # - name: Generate the Wasm package
+            #     - working-directory: ./wasm
+            #     - run: cargo wasm-pack build --out-dir $WASM_PACKAGE_NAME
+            # # GitHub action for Node.JS.
+            # # https://github.com/actions/setup-node
+            # - uses: actions/setup-node@v2
+            #     with:
+            #         node-version: '16.13.2'
+            #         check-latest: true
+            # # Run `npm install` in the React client.
+            # - name: Install dependencies in the React client
+            #     - working-directory: ./react
+            #     - run: npm install
+            # # Lastly build the React client.
+            # - name: Build the react client
+            #     - working-directory: ./react
+            #     - run: npm build
+            
+
