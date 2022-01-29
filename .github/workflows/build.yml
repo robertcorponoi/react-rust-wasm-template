@@ -41,13 +41,12 @@ jobs:
               with:
                 command: build
                 args: --release --all-features --manifest-path ./wasm/Cargo.toml
-            # # Next, install the `wasm-pack` binary.
-            # - name: Install wasm-pack
-            #     - working-directory: ./wasm
-            #     - uses: actions-rs/cargo@v1
-            #         with:
-            #             command: install
-            #             args: wasm-pack
+            # Next, install the `wasm-pack` binary.
+            - name: Install wasm-pack
+              uses: actions-rs/cargo@v1
+              with:
+                command: install
+                args: wasm-pack
             # # Run the `wasm-pack` binary to generate the Wasm package.
             # - name: Generate the Wasm package
             #     - working-directory: ./wasm
