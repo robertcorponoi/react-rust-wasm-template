@@ -47,10 +47,10 @@ jobs:
               with:
                 command: install
                 args: wasm-pack
-            # # Run the `wasm-pack` binary to generate the Wasm package.
-            # - name: Generate the Wasm package
-            #     - working-directory: ./wasm
-            #     - run: cargo wasm-pack build --out-dir $WASM_PACKAGE_NAME
+            # Run the `wasm-pack` binary to generate the Wasm package.
+            - name: Generate the Wasm package
+              working-directory: ./wasm
+              run: cargo wasm-pack build --out-dir $WASM_PACKAGE_NAME
             # # GitHub action for Node.JS.
             # # https://github.com/actions/setup-node
             # - uses: actions/setup-node@v2
