@@ -9,6 +9,7 @@ An opinionated React + Rust Wasm template that helps you understand how to devel
 - [Getting Started](#getting-started)
 - [Using Wasm in the React Client](#using-wasm-in-the-react-client)
 - [Changing the Default Naming Convention](#changing-the-default-naming-conventions)
+- [GitHub Actions Workflow](#github-actions-workflow)
 - [License](#license)
 
 ## Getting Started
@@ -110,6 +111,10 @@ You need to change the `"file:../wasm-build"` to the new name you set for the Wa
 ```
 
 To change this, you change the key of `wasm` to whatever you wish to import the built Wasm as. However, you will also have to change this anywhere in your code where you import the `wasm` package.
+
+## GitHub Actions Workflow
+
+There is a GitHub actions workflow in progress as you can see at .github/workflows but it's currently disabled as there's an issue with the React client build. This issue can be tracked [here](https://github.com/robertcorponoi/React-Rust-Wasm-Template/issues/1).
 
 ## License
 
