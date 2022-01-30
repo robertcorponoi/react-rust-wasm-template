@@ -18,11 +18,8 @@ name: CI
 # 3. Runs `npm install` to install the dependencies in the React client.
 # 4. Runs `npm build` to build the React client.
 jobs:
-    build:
-        # A name for our job which will be displayed on GitHub.
-        name: React Wasm
-        # The type of runner to use to run the job on. `ubuntu-latest` is 
-        # usually the right choice.
+    rust:
+        name: Build Rust Source
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -41,6 +38,12 @@ jobs:
               with:
                 command: build
                 args: --release --all-features --manifest-path ./wasm/Cargo.toml
+    wasm-pack:
+        needs: rust
+        name: Build Wasm Package
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
             # Next, install the `wasm-pack` binary.
             - name: Install wasm-pack
               uses: actions-rs/cargo@v1
@@ -50,6 +53,12 @@ jobs:
             # Run the `wasm-pack` binary to generate the Wasm package.
             - name: Generate the Wasm package
               run: wasm-pack build ./wasm --out-dir ../wasm-build
+    react-client:
+        needs: wasm-pack
+        name: Build React Client
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
             # GitHub action for Node.JS.
             # https://github.com/actions/setup-node
             - uses: actions/setup-node@v2
@@ -64,5 +73,3 @@ jobs:
             - name: Build the react client
               working-directory: ./react
               run: npm build
-            
-
