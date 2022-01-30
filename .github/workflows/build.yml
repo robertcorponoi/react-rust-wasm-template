@@ -64,7 +64,7 @@ jobs:
             # Run `npm install` in the React client.
             - name: Install dependencies in the React client
               # working-directory: ./react
-              run: cd ./react && npm install
+              run: cd ./react && npm install --loglevel verbose
             # Lastly build the React client.
             - name: Build the react client
               # working-directory: ./react
