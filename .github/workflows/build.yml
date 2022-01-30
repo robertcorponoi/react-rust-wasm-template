@@ -48,11 +48,12 @@ jobs:
                 args: wasm-pack
             # Run the `wasm-pack` binary to generate the Wasm package.
             - name: Generate the Wasm package
-              run: wasm-pack build ./wasm --out-dir '../wasm-build'
+              run: wasm-pack build ./wasm --out-dir ../wasm-build
     react-client:
         needs: wasm-pack
         name: Build React Client
         runs-on: ubuntu-latest
+        working-directory: ./react
         steps:
             - uses: actions/checkout@v2
             # GitHub action for Node.JS.
@@ -63,9 +64,7 @@ jobs:
                 check-latest: true
             # Run `npm install` in the React client.
             - name: Install dependencies in the React client
-              working-directory: ./react
               run: npm install
             # Lastly build the React client.
             - name: Build the react client
-              working-directory: ./react
               run: npm run build:prod
