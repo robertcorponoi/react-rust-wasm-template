@@ -48,7 +48,7 @@ jobs:
                 args: wasm-pack
             # Run the `wasm-pack` binary to generate the Wasm package.
             - name: Generate the Wasm package
-              run: wasm-pack build ./wasm --out-dir ../wasm-build
+              run: wasm-pack build ./wasm --out-dir '../wasm-build'
     react-client:
         needs: wasm-pack
         name: Build React Client
