@@ -3,6 +3,10 @@
 # been opened.
 on: [push]
 
+env:
+    # The name of the directory of the generated Wasm package.
+    WASM_PACKAGE_NAME: wasm-build
+
 # The name of the workflow to be displayed on the repository's actions page.
 name: CI
 
@@ -45,8 +49,7 @@ jobs:
                 args: wasm-pack
             # Run the `wasm-pack` binary to generate the Wasm package.
             - name: Generate the Wasm package
-              working-directory: ./wasm
-              run: wasm-pack build --out-dir ../wasm-build
+              run: wasm-pack build ./wasm --out-dir wasm-build
             # # GitHub action for Node.JS.
             # # https://github.com/actions/setup-node
             # - uses: actions/setup-node@v2
