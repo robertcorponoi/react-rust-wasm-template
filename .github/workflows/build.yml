@@ -49,20 +49,20 @@ jobs:
                 args: wasm-pack
             # Run the `wasm-pack` binary to generate the Wasm package.
             - name: Generate the Wasm package
-              run: wasm-pack build ./wasm --out-dir wasm-build
-            # # GitHub action for Node.JS.
-            # # https://github.com/actions/setup-node
-            # - uses: actions/setup-node@v2
-            #     with:
-            #         node-version: '16.13.2'
-            #         check-latest: true
-            # # Run `npm install` in the React client.
-            # - name: Install dependencies in the React client
-            #     - working-directory: ./react
-            #     - run: npm install
-            # # Lastly build the React client.
-            # - name: Build the react client
-            #     - working-directory: ./react
-            #     - run: npm build
+              run: wasm-pack build ./wasm --out-dir ../wasm-build
+            # GitHub action for Node.JS.
+            # https://github.com/actions/setup-node
+            - uses: actions/setup-node@v2
+              with:
+                node-version: '16.13.2'
+                check-latest: true
+            # Run `npm install` in the React client.
+            - name: Install dependencies in the React client
+              working-directory: ./react
+              run: npm install
+            # Lastly build the React client.
+            - name: Build the react client
+              working-directory: ./react
+              run: npm build
             
 
