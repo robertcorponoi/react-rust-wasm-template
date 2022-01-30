@@ -61,11 +61,11 @@ jobs:
               with:
                 node-version: '16.13.2'
                 check-latest: true
-            # Run `npm install` in the React client.
+            # Run `npm ci` in the React client.
             - name: Install dependencies in the React client
-              # working-directory: ./react
-              run: cd ./react && npm install --loglevel verbose
+              working-directory: ./react
+              run: npm ci
             # Lastly build the React client.
             - name: Build the react client
-              # working-directory: ./react
-              run: cd ./react && npm run build:prod
+              working-directory: ./react
+              run: npm run build:prod
