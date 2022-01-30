@@ -3,10 +3,6 @@
 # been opened.
 on: [push]
 
-env:
-    # The name of the directory of the generated Wasm package.
-    WASM_PACKAGE_NAME: wasm-build
-
 # The name of the workflow to be displayed on the repository's actions page.
 name: CI
 
@@ -72,4 +68,4 @@ jobs:
             # Lastly build the React client.
             - name: Build the react client
               working-directory: ./react
-              run: npm build
+              run: npm run build:prod
