@@ -64,7 +64,7 @@ jobs:
             # Run `npm ci` in the React client.
             - name: Install dependencies in the React client
               working-directory: ./react
-              run: npm ci
+              run: npm ci && ls node_modules
             # Lastly build the React client.
             - name: Build the react client
               working-directory: ./react
