@@ -23,13 +23,13 @@ An opinionated React + Rust Wasm template that helps you understand how to devel
 2. Change to the `wasm` directory. We use the `scripts/develop.sh` shell script to rebuild the Wasm bundle when changes are made to the source. Make sure that this script has the correct permissions to be executed by running:
 
 ```sh
-$ chmod +x scripts/develop.sh
+chmod +x scripts/develop.sh
 ```
 
 Make sure this works by running the script using:
 
 ```sh
-$ scripts.develop.sh
+scripts/develop.sh
 ```
 
 You should see the the Wasm being built and output to a `wasm-build` directory at the root (alongside the `wasm` and `react` directories). The process should not exist as it'll watch the source for changes. To make sure this works, to go the `src/lib.rs` file and add a simple change and save the file. You should see it rebuild and update the `wasm-build` directory.
@@ -43,18 +43,18 @@ While there are some examples in the template, let's go through the process of a
 1. Open up two terminals and the following scripts in them:
 
 ```sh
-$ cd wasm && ./scripts/develop.sh
+cd wasm && ./scripts/develop.sh
 ```
 
 ```sh
-$ cd react && npm run develop
+cd react && npm run develop
 ```
 
 2. Open up the `wasm/src/lib.rs` file so that we can add a new function. In here, add the following:
 
 ```rs
 /// Takes a name as input and returns a greeting in the format of "Hello, Name".
-/// 
+///
 /// `name` - The name to use in the greeting.
 #[wasm_bindgen]
 pub fn greeting(name: String) -> String {
@@ -73,9 +73,7 @@ import { greeting } from "wasm";
 Then, in the `return` part of the component, use it like so:
 
 ```tsx
-return (
-    <p>{greeting("Bob")}</p>
-);
+return <p>{greeting("Bob")}</p>;
 ```
 
 Now if you go to `http://localhost:3000` (or the page that your component is on) you should see "Hello, Bob" displayed.
@@ -92,21 +90,21 @@ By default the React client is in a directory named `react`, the Wasm source is 
 
 ```json
 {
-    "dependencies": {
-        "wasm": "file:../wasm-build"
-    }
+  "dependencies": {
+    "wasm": "file:../wasm-build"
+  }
 }
 ```
 
-You need to change the `"file:../wasm-build"` to the new name you set for the Wasm build output. 
+You need to change the `"file:../wasm-build"` to the new name you set for the Wasm build output.
 
 - Wasm import (default `wasm`) - In the React client's `package.json`, the built Wasm is imported as:
 
 ```json
 {
-    "dependencies": {
-        "wasm": "file:../wasm-build"
-    }
+  "dependencies": {
+    "wasm": "file:../wasm-build"
+  }
 }
 ```
 
