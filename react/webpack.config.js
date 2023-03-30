@@ -66,7 +66,7 @@ module.exports = (env) => {
         },
         // Specifies the extensions that Webpack should resolve.
         // This allows us to import modules without needing to add their extensions.
-        resolve: { extensions: [".*", ".js", ".jsx", ".ts", ".tsx"] },
+        resolve: { extensions: ["*", ".js", ".jsx", ".ts", ".tsx"] },
         // Tells Webpack where to put the bundled code.
         // Here we tell Webpack to place it in the dist directory at the root of the project.
         output: {
